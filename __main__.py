@@ -2,6 +2,13 @@ import os
 import shutil
 import re
 
+"""
+--This scrip is able to create fault trees by allowing user to set number of basic events.
+--The created fault trees are stored in as .xml in open PRA format.
+--The quantification of fault trees are done using XFTA version 1.0 and SCRAM.
+"""
+###############################################################################################
+#Creating a config .xml file tp run XFTA from a template
 def prepare_xfta(name):
 
     with open('xfta.template', 'r') as file:
@@ -9,20 +16,28 @@ def prepare_xfta(name):
     filedata = re.sub("NAME", name, filedata)
     with open("xfta_" + name + ".xml", 'w') as file:
         file.write(filedata)
+###############################################################################################
 
+###############################################################################################
+#Running XFTA with the command line
 def run_xfta(xfta_config_name):
-
     xfta_exec_dir = "C:/Users/emaras/Desktop/xfta/xfta-1-3-1-win32/"
     command_to_run_xfta = xfta_exec_dir + "xftar " + xfta_config_name
-    print(command_to_run_xfta)
+    #print(command_to_run_xfta)
     os.system(command_to_run_xfta)
+###############################################################################################
 
+###############################################################################################
+#Running SCRAM with the command line
 def run_scram(scram_input):
     scram_exec_command = "docker run -it --rm -v " + os.getcwd() + "/codes/scram:/scram supra scram /scram/" + scram_input + ".xml --bdd > codes/scram/" + scram_input + ".txt"
-    print(scram_exec_command)
+    #print(scram_exec_command)
     os.system(scram_exec_command)
-    print(scram_input + '.xml kostu')
+    #print(scram_input + '.xml kostu')
+###############################################################################################
 
+###############################################################################################
+#Creating fault tree
 def generate_multiple_ft():
 
     num_basic = 100
@@ -39,7 +54,9 @@ def generate_multiple_ft():
         # rest
         run_xfta(os.getcwd() + "/codes/xfta/xfta_ft_" + str(num_basic) + ".xml")
         num_basic += 100
+###############################################################################################
 
+###############################################################################################
 if __name__ == '__main__':
     if not os.path.exists("codes/scram"):
         os.makedirs("codes/scram")
@@ -47,3 +64,4 @@ if __name__ == '__main__':
         os.makedirs("codes/xfta")
     generate_multiple_ft()
     # prepare_xfta()
+###############################################################################################
