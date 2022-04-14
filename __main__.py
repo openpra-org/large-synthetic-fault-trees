@@ -23,15 +23,15 @@ def prepare_xfta(name):
 def run_xfta(xfta_config_name):
     xfta_exec_dir = "C:/Users/emaras/Desktop/xfta/xfta-1-3-1-win32/"
     command_to_run_xfta = xfta_exec_dir + "xftar " + xfta_config_name
-    #print(command_to_run_xfta)
+    print(command_to_run_xfta)
     os.system(command_to_run_xfta)
 ###############################################################################################
 
 ###############################################################################################
 #Running SCRAM with the command line
 def run_scram(scram_input):
-    scram_exec_command = "docker run -it --rm -v " + os.getcwd() + "/codes/scram:/scram supra scram /scram/" + scram_input + ".xml --bdd > codes/scram/" + scram_input + ".txt"
-    #print(scram_exec_command)
+    scram_exec_command = "docker run -it --rm -v " + os.getcwd() + "/codes/scram:/scram supra scram /scram/" + scram_input + ".xml --mocus > codes/scram/" + scram_input + ".txt"
+    print(scram_exec_command)
     os.system(scram_exec_command)
     #print(scram_input + '.xml kostu')
 ###############################################################################################
