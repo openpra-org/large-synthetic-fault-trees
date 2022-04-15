@@ -7,6 +7,8 @@ import re
 --The created fault trees are stored in as .xml in open PRA format.
 --The quantification of fault trees are done using XFTA version 1.0 and SCRAM.
 """
+import multiprocessing as mp
+
 ###############################################################################################
 #Creating a config .xml file tp run XFTA from a template
 def prepare_xfta(name):
@@ -38,22 +40,18 @@ def run_scram(scram_input):
 
 ###############################################################################################
 #Creating fault tree
-def generate_multiple_ft():
-
-    num_basic = 100
-    while (num_basic <= 1000):
-        command_to_generate = "python scripts/fault_tree_generator.py -b " + str(num_basic) + " -o codes/scram/ft_" + str(num_basic) + ".xml"
-        # generate inputs in scram directory
-        os.system(command_to_generate)
-        run_scram("ft_" + str(num_basic))
-        # copy ft inputs to xfta directory
-        shutil.copy("codes/scram/ft_" + str(num_basic) + ".xml", "codes/xfta/ft_" + str(num_basic) + ".xml")
-        # generate xfta config file and move
-        prepare_xfta("ft_"+str(num_basic))
-        os.replace("xfta_ft_"+str(num_basic)+".xml", "codes/xfta/xfta_ft_"+str(num_basic)+".xml")
-        # rest
-        run_xfta(os.getcwd() + "/codes/xfta/xfta_ft_" + str(num_basic) + ".xml")
-        num_basic += 100
+def generate_multiple_ft(num_basic):
+    command_to_generate = "python scripts/fault_tree_generator.py -b " + str(num_basic) + " -o codes/scram/ft_" + str(num_basic) + ".xml"
+    # generate inputs in scram directory
+    os.system(command_to_generate)
+    # run_scram("ft_" + str(num_basic))
+    # copy ft inputs to xfta directory
+    shutil.copy("codes/scram/ft_" + str(num_basic) + ".xml", "codes/xfta/ft_" + str(num_basic) + ".xml")
+    # generate xfta config file and move
+    prepare_xfta("ft_"+str(num_basic))
+    os.replace("xfta_ft_"+str(num_basic)+".xml", "codes/xfta/xfta_ft_"+str(num_basic)+".xml")
+    # rest
+    # run_xfta(os.getcwd() + "/codes/xfta/xfta_ft_" + str(num_basic) + ".xml")
 ###############################################################################################
 
 ###############################################################################################
@@ -62,6 +60,12 @@ if __name__ == '__main__':
         os.makedirs("codes/scram")
     if not os.path.exists("codes/xfta"):
         os.makedirs("codes/xfta")
-    generate_multiple_ft()
+
+    upper_limit = 1000
+    pool = mp.Pool(mp.cpu_count())
+    pool.map_async(generate_multiple_ft, [num_basic for num_basic in range(100, upper_limit, 100)]).get()
+    pool.close()
+
     # prepare_xfta()
+    print("Number of processors: ", mp.cpu_count())
 ###############################################################################################
