@@ -30,7 +30,7 @@ def run_xfta(xfta_config_name):
 ###############################################################################################
 #Running SCRAM with the command line
 def run_scram(scram_input):
-    scram_exec_command = "docker run -it --rm -v " + os.getcwd() + "/codes/scram:/scram supra scram /scram/" + scram_input + ".xml --mocus > codes/scram/" + scram_input + ".txt"
+    scram_exec_command = "docker run -it --rm -v " + os.getcwd() + "/codes/scram:/scram supra scram /scram/" + scram_input + ".xml --mocus --probability --importance > codes/scram/" + scram_input + ".txt"
     print(scram_exec_command)
     os.system(scram_exec_command)
     #print(scram_input + '.xml kostu')
