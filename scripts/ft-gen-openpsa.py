@@ -29,8 +29,10 @@ random.seed(123)
 #     os.system(commandToRunSCRAM)
 
 gateList = ['or','and']
-n = 11
-while (n<=20):
+gateListOR = ['or']
+gateListAND = ['and']
+n = 1000
+while (n<=50000):
 
     def configFileGenXFTA(name):
 
@@ -50,26 +52,38 @@ while (n<=20):
         for gateNumber in range(1,n+1):
             if gateNumber ==(n):
                 defineGate = ET.SubElement(faultTreeName, 'define-gate', {'name': 'g' + str(gateNumber)})
-                gateType = ET.SubElement(defineGate, random.choice(gateList))
+                gateType = ET.SubElement(defineGate, random.choice(gateListAND))
                 basicEvent1 = ET.SubElement(gateType, 'basic-event', {'name': 'be' + str(gateNumber)})
                 basicEvent2 = ET.SubElement(gateType, 'basic-event', {'name': 'bee' + str(gateNumber)})
                 #gate = ET.SubElement(gateType, 'gate', {'name': 'g' + str(gateNumber + 1)})
 
                 basicEventValue1 = ET.SubElement(modelData, 'define-basic-event', {'name': 'be' + str(gateNumber)})
-                basicEventValu1Assign = ET.SubElement(basicEventValue1, 'float', {'value': str(0.1)})
+                basicEventValu1Assign = ET.SubElement(basicEventValue1, 'float', {'value': str(0.05)})
                 basicEventValue2 = ET.SubElement(modelData, 'define-basic-event', {'name': 'bee' + str(gateNumber)})
-                basicEventValu2Assign = ET.SubElement(basicEventValue2, 'float', {'value': str(0.1)})
-            else:
-                defineGate = ET.SubElement(faultTreeName, 'define-gate', {'name': 'g'+str(gateNumber)})
-                gateType = ET.SubElement(defineGate,random.choice(gateList))
-                basicEvent1 =ET.SubElement(gateType,'basic-event',{'name':'be'+str(gateNumber)})
+                basicEventValu2Assign = ET.SubElement(basicEventValue2, 'float', {'value': str(0.05)})
+            elif gateNumber%2 ==0:
+                defineGate = ET.SubElement(faultTreeName, 'define-gate', {'name': 'g' + str(gateNumber)})
+                gateType = ET.SubElement(defineGate, random.choice(gateListAND))
+                basicEvent1 = ET.SubElement(gateType, 'basic-event', {'name': 'be' + str(gateNumber)})
                 basicEvent2 = ET.SubElement(gateType, 'basic-event', {'name': 'bee' + str(gateNumber)})
-                gate = ET.SubElement(gateType,'gate',{'name':'g'+str(gateNumber+1)})
+                gate = ET.SubElement(gateType, 'gate', {'name': 'g' + str(gateNumber + 1)})
 
                 basicEventValue1 = ET.SubElement(modelData, 'define-basic-event', {'name': 'be' + str(gateNumber)})
-                basicEventValu1Assign = ET.SubElement(basicEventValue1,'float', {'value': str(0.1)})
+                basicEventValu1Assign = ET.SubElement(basicEventValue1, 'float', {'value': str(0.05)})
                 basicEventValue2 = ET.SubElement(modelData, 'define-basic-event', {'name': 'bee' + str(gateNumber)})
-                basicEventValu2Assign = ET.SubElement(basicEventValue2,'float', {'value': str(0.1)})
+                basicEventValu2Assign = ET.SubElement(basicEventValue2, 'float', {'value': str(0.05)})
+            else:
+                defineGate = ET.SubElement(faultTreeName, 'define-gate', {'name': 'g' + str(gateNumber)})
+                gateType = ET.SubElement(defineGate, random.choice(gateListOR))
+                basicEvent1 = ET.SubElement(gateType, 'basic-event', {'name': 'be' + str(gateNumber)})
+                basicEvent2 = ET.SubElement(gateType, 'basic-event', {'name': 'bee' + str(gateNumber)})
+                gate = ET.SubElement(gateType, 'gate', {'name': 'g' + str(gateNumber + 1)})
+
+                basicEventValue1 = ET.SubElement(modelData, 'define-basic-event', {'name': 'be' + str(gateNumber)})
+                basicEventValu1Assign = ET.SubElement(basicEventValue1, 'float', {'value': str(0.05)})
+                basicEventValue2 = ET.SubElement(modelData, 'define-basic-event', {'name': 'bee' + str(gateNumber)})
+                basicEventValu2Assign = ET.SubElement(basicEventValue2, 'float', {'value': str(0.05)})
+
 
 
         tree = ET.ElementTree(root)
@@ -80,4 +94,4 @@ while (n<=20):
         configFileGenXFTA('ft-openpsa-'+str(n)+'Gates.xml')
         # runXFTA(pathXFTAModels + " " + "xfta-ft-openpsa-"+str(n)+"Gates.xml")
         # runSCRAM('ft-openpsa-'+str(n)+'Gates.xml')
-    n+=10
+    n+=1000

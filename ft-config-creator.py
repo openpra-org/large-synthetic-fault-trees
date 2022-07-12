@@ -7,12 +7,12 @@ import os
 commandToRun = ""
 """Generates openpsa .xml format fault trees and store them in the openpsa directory"""
 def ftGenOpenpsa():
-    commandToRun = "python scripts/ft-gen-openpsa.py"
+    commandToRun = "python scripts/ft-gen-openpsa.py -o models/xfta"
     os.system(commandToRun)
 
 """Generates SAPHIRE .JSInp format fault trees and store them in the saphsolve directory"""
 def ftGenSaphire():
-    commandToRun = "python scripts/ft-gen-saphsolve.py"
+    commandToRun = "python scripts/ft-gen-saphsolve.py -o models/saphire"
     os.system(commandToRun)
 
 """Generates config files for Benchexec in .xml format and store them in the benchexec-config directory"""
@@ -52,4 +52,4 @@ if __name__ == '__main__':
         os.makedirs("models/saphsolve")
     ftGenOpenpsa()
     ftGenSaphire()
-    runXFTA()
+    #runXFTA()

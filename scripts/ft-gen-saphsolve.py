@@ -9,8 +9,8 @@ import itertools
 import random
 random.seed(123)
 
-numGates = 11
-while(numGates<=20):
+numGates = 1000
+while(numGates<=50000):
     def ftGenSaphire(fileName):
 
     #"""reading the json file from sample base"""
@@ -86,22 +86,30 @@ while(numGates<=20):
         gateList=base['saphiresolveinput']['faulttreelist'][0]['gatelist']
 
         gatelistGateTypeList = ['or','and']
+        gatelistGateTypeListOR = ['or']
+        gatelistGateTypeListAND = ['and']
         gatelistNumInputsList = [3]
 
 
         for ftheaderNumGates in range(numGates):
-            if gateList[ftheaderNumGates]['gateid'] == numGates:
+            if ftheaderNumGates%2==0:
                 gateList[ftheaderNumGates]['gateid'] = ftheaderNumGates + 1
-                gateList[ftheaderNumGates]['gatetype'] = random.choice(gatelistGateTypeList)
-                gateList[ftheaderNumGates]['numinputs'] = random.choice(gatelistNumInputsList)-1
+                gateList[ftheaderNumGates]['gatetype'] = random.choice(gatelistGateTypeListOR)
+                gateList[ftheaderNumGates]['numinputs'] = random.choice(gatelistNumInputsList)
                 gateList[ftheaderNumGates]['eventinput'] = [100 + ftheaderNumGates, 1000 + ftheaderNumGates]
-                del gateList[ftheaderNumGates]['gateinput']
+                gateList[ftheaderNumGates]['gateinput'] = [ftheaderNumGates + 1 + 1]
             else:
                 gateList[ftheaderNumGates]['gateid'] = ftheaderNumGates + 1
-                gateList[ftheaderNumGates]['gatetype'] = random.choice(gatelistGateTypeList)
+                gateList[ftheaderNumGates]['gatetype'] = random.choice(gatelistGateTypeListAND)
                 gateList[ftheaderNumGates]['numinputs'] = random.choice(gatelistNumInputsList)
-                gateList[ftheaderNumGates]['eventinput'] = [100+ftheaderNumGates, 1000+ftheaderNumGates]
+                gateList[ftheaderNumGates]['eventinput'] = [100 + ftheaderNumGates, 1000 + ftheaderNumGates]
                 gateList[ftheaderNumGates]['gateinput'] = [ftheaderNumGates + 1 + 1]
+            if gateList[ftheaderNumGates]['gateid'] == numGates:
+                gateList[ftheaderNumGates]['gateid'] = ftheaderNumGates + 1
+                gateList[ftheaderNumGates]['gatetype'] = random.choice(gatelistGateTypeListAND)
+                gateList[ftheaderNumGates]['numinputs'] = random.choice(gatelistNumInputsList) - 1
+                gateList[ftheaderNumGates]['eventinput'] = [100 + ftheaderNumGates, 1000 + ftheaderNumGates]
+                del gateList[ftheaderNumGates]['gateinput']
 
             dictCopy = gateList[ftheaderNumGates].copy()
             gateList.append(dictCopy)
@@ -251,7 +259,7 @@ while(numGates<=20):
             eventList[numBasicEvents+4]['name'] = str(basicEventList[numBasicEvents])
             eventList[numBasicEvents+4]['evworkspacepair']['ph'] = 1
             eventList[numBasicEvents+4]['evworkspacepair']['mt'] = 1
-            eventList[numBasicEvents+4]['value'] = 0.1
+            eventList[numBasicEvents+4]['value'] = 0.05
             eventList[numBasicEvents+4]['initf'] = " "
             eventList[numBasicEvents+4]['processf'] = " "
             eventList[numBasicEvents+4]['calctype'] = 1
@@ -267,4 +275,4 @@ while(numGates<=20):
 #writing the manipulated base file in a new json file
     if __name__=='__main__':
         ftGenSaphire('ft-saphsolve-'+str(numGates)+'Gates.JSInp')
-    numGates+=10
+    numGates+=1000
