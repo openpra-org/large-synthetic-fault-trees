@@ -2,13 +2,13 @@
 <!DOCTYPE xfta>
 <xfta>
 <load>
-<model input="models/xfta/NAME" />
+<model input="/home/bench/ft-bench/models/models3/xfta/NAME" />
 </load>
 <build>
-<minimal-cutsets top-event="g1" handle="MCS" minimum-probability="1.0e-14" />
+<minimal-cutsets top-event="g1" handle="MCS" minimum-probability="1.0e-20" />
 </build>
 <compute>
-<probability top-event="g1" handle="MCS" output="results/xfta/NAME_probability.txt" />
-<importance-factors top-event="g1" handle="MCS" output="results/xfta/NAME_importance_factor.txt" />
+<probability top-event="g1" handle="MCS" output="/dev/fd/1" />
+<importance-factors top-event="g1" handle="MCS" output="/dev/fd/1" />
 </compute>
 </xfta>

@@ -856,7 +856,7 @@ def manage_cmd_args(argv=None):
                         "--num-basic",
                         type=int,
                         help="# of basic events",
-                        default=9999,
+                        default=1000,
                         metavar="int")
     parser.add_argument("-a",
                         "--num-args",
@@ -872,7 +872,7 @@ def manage_cmd_args(argv=None):
                         default=[1, 1, 0, 0, 0])
     parser.add_argument("--common-b",
                         type=float,
-                        default=0.1,
+                        default=0.3,
                         metavar="float",
                         help="avg. %% of common basic events per gate")
     parser.add_argument("--common-g",
