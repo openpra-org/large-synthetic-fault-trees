@@ -1,3 +1,0 @@
-[submodule "fault-tree-generator"]
-	path = fault-tree-generator
-	url = git@gitlab.openpra.org:publics/fault-tree-generator.git
