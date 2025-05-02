@@ -1,34 +1,30 @@
 cff-version: 1.2.0
 type: dataset
+message: "If you use this dataset, please cite it as below."
 title: "openpra-org/synthetic-models: Synthetically generated PRA models."
 version: "2025"
 doi: 10.5281/zenodo.15320669
-url: https://zenodo.org/doi/10.5281/zenodo.15320669
-repository-code: https://github.com/openpra-org/synthetic-models
-abstract: "PRA/reliability models, typically event trees and fault trees, in various @openpra-org supported formats."
 date-released: 2025-05-02
+url: "https://zenodo.org/doi/10.5281/zenodo.15320669"
+repository-code: "https://github.com/openpra-org/synthetic-models"
+abstract: "PRA/reliability models, typically event trees and fault trees, in various @openpra-org supported formats."
 license: MIT
-publisher: Zenodo
+publisher: "Zenodo"
 authors:
-  - family-names: Aras
-    given-names: Egemen
-    orcid: https://orcid.org/0000-0002-4886-2094
-    affiliation: OpenPRA Initiative
-    github: egemen-m
-  - family-names: Earthperson
-    given-names: Arjun
-    orcid: https://orcid.org/0000-0003-2085-0638
-    affiliation: OpenPRA Initiative
-    github: a-earthperson
-  - family-names: Tezbasaran
-    given-names: Alp
-    orcid: https://orcid.org/0000-0002-4938-1436
-    affiliation: OpenPRA Initiative
-    github: alptezbasaran
-  - family-names: Diaconeasa
-    given-names: Mihai A.
-    orcid: https://orcid.org/0000-0002-4886-2094
-    affiliation: OpenPRA Initiative
-    github: madiacon
-  - name: OpenPRA Initiative
-    # Treated as a group author
+  - family-names: "Aras"
+    given-names: "Egemen"
+    orcid: "https://orcid.org/0000-0002-4886-2094"
+    github: "egemen-m"
+  - family-names: "Earthperson"
+    given-names: "Arjun"
+    orcid: "https://orcid.org/0000-0003-2085-0638"
+    github: "a-earthperson"
+  - family-names: "Tezbasaran"
+    given-names: "Alp"
+    orcid: "https://orcid.org/0000-0002-4938-1436"
+    github: "alptezbasaran"
+  - family-names: "Diaconeasa"
+    given-names: "Mihai A."
+    orcid: "https://orcid.org/0000-0002-4886-2094"
+    github: "madiacon"
+  - name: "OpenPRA Initiative"
