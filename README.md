@@ -1,4 +1,6 @@
 # Synthetic PRA Models
+<a href="https://doi.org/10.5281/zenodo.15320669"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.15320669.svg" alt="DOI"></a>
+
 PRA/reliability models, typically event trees and fault trees, in various @openpra-org supported formats.
 
 ## Schema Validation
